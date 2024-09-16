@@ -53,5 +53,5 @@
     "@tanstack/react-query-devtools": "^5.56.2",
     "http-proxy-middleware": "^3.0.2"
   },
-  "homepage": "https://SeHIgh.github.io/CRYPTO-TRACKER/crypto-tracker"
+  "homepage": "https://SeHIgh.github.io/CRYPTO-TRACKER"
 }
