@@ -31,7 +31,11 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
+  height: 100vh;
   line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 menu, ol, ul {
   list-style: none;
@@ -52,7 +56,7 @@ table {
   box-sizing: border-box;
 }
 body {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: "galmuri9", sans-serif;
   background-color:${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
 }
