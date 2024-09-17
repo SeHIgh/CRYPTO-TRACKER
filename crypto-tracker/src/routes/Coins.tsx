@@ -30,7 +30,7 @@ const SliderWrapper = styled.div`
   }
   .slick-track {
     //모든 자식 요소를 담고 있는 가로로 기다란 트랙(숨겨진 부분 존재)
-    height: 300px;
+    height: 80px;
   }
   .slick-slide {
     //각 요소들
@@ -40,7 +40,7 @@ const SliderWrapper = styled.div`
     align-items: center;
     div {
       //내가 직접 넣어서 렌더링해준 BookCover 컴포넌트
-      width: 250px;
+      width: 200px;
     }
   }
   .slick-current {
@@ -66,7 +66,6 @@ const Coin = styled.div`
   background-color: transparent;
   color: ${(props) => props.theme.bgColor};
   padding: 0;
-  border: 2px solid ${(props) => props.theme.accentColor};
   border-radius: 50px;
   transition: 0.2s ease-in-out;
   a {
@@ -76,7 +75,7 @@ const Coin = styled.div`
     transition: color 0.2s ease-in;
     display: block;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     gap: 20px;
     align-items: center;
@@ -85,18 +84,9 @@ const Coin = styled.div`
     text-align: center;
   }
   &:hover {
-    /* color: ${(props) => props.theme.accentColor}; */
-    color: white;
-    /* background-color: #c0c0c0; */
-    background-color: white;
-    /* transform: scale(1.1); */
-    a {
-      font-size: 26px;
-    }
-    img {
-      width: 150px;
-      height: 150px;
-    }
+    color: ${(props) => props.theme.accentColor};
+    background-color: #c0c0c0;
+    transform: scale(1.1);
   }
 `;
 
@@ -111,8 +101,22 @@ const Loader = styled.span`
 `;
 
 const Img = styled.img`
-  width: 125px;
-  height: 125px;
+  width: 65px;
+  height: 65px;
+`;
+
+const Rank = styled.span`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  background-color: ${(props) => props.theme.accentColor};
+  border-radius: 10px;
+  color: ${(props) => props.theme.bgColor};
+  text-align: center;
 `;
 
 interface Icoin {
@@ -145,44 +149,409 @@ function Coins() {
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
-        <SliderWrapper>
-          <Slider
-            {...{
-              className: "center",
-              centerMode: true,
-              infinite: true,
-              centerPadding: "100px",
-              slidesToShow: 3,
-              speed: 500,
-              autoplay: true,
-              autoplaySpeed: 3000,
-            }}
-          >
+        <>
+          <SliderWrapper>
             {/* <CoinsList> */}
-            {data?.map((coin) => (
-              <Coin key={coin.id}>
-                <Link
-                  to={{
-                    pathname: `/${coin.id}`,
-                  }}
-                  state={{
-                    name: coin.name,
-                  }}
-                >
-                  <Img
-                    src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
-                    onError={(t) => {
-                      t.currentTarget.onerror = null;
-                      t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
-                    }}
-                  />
-                  {coin.rank}. {coin.name} {/*&rarr*/}
-                </Link>
-              </Coin>
-            ))}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 0 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank>
+                      {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
             {/* </CoinsList> */}
-          </Slider>
-        </SliderWrapper>
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 1 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 2 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 3 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 4 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 5 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 6 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 7 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 8 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+          <SliderWrapper>
+            {/* <CoinsList> */}
+            <Slider
+              {...{
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "100px",
+                slidesToShow: 3,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 3000,
+              }}
+            >
+              {data?.map((coin, idx) =>
+                Math.floor(idx / 10) === 9 ? (
+                  <Coin key={coin.id}>
+                    <Link
+                      to={{
+                        pathname: `/${coin.id}`,
+                      }}
+                      state={{
+                        name: coin.name,
+                      }}
+                    >
+                      <Img
+                        src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`}
+                        onError={(t) => {
+                          t.currentTarget.onerror = null;
+                          t.currentTarget.src = `https://cryptoicon-api.pages.dev/icons/128/color/_no_image_.png`;
+                        }}
+                      />
+                      <Rank>{coin.rank}</Rank> {coin.name} {/*&rarr*/}
+                    </Link>
+                  </Coin>
+                ) : null
+              )}
+            </Slider>
+            {/* </CoinsList> */}
+          </SliderWrapper>
+        </>
       )}
     </Container>
   );
