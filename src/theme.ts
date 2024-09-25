@@ -10,8 +10,8 @@ export const darkTheme: DefaultTheme = {
 };
 
 export const lightTheme: DefaultTheme = {
-  bgColor: "whitesmoke",
-  textColor: "black",
+  bgColor: "#ecf0f1",
+  textColor: "#2c3e50",
   accentColor: "#2c3e50",
   activeColor: "rgba(0, 0, 0, 0.3)",
   inactiveColor: "rgba(0, 0, 0, 0.5)",
