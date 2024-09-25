@@ -9,5 +9,6 @@ declare module "styled-components" {
     accentColor: string;
     activeColor: string;
     inactiveColor: string;
+    toggleBtn: string;
   }
 }

@@ -164,8 +164,6 @@ interface IPriceData {
 
 function Coin() {
   const { coinId } = useParams<RouteParams>();
-  // const { state } = useLocation<RouteState>();
-  // const { state } = useLocation().state as RouteState;
   const location = useLocation();
   const { state } = location.state as RouteState || {name: "Unknown", state: ""};
   const priceMatch = useMatch("/:coinId/price");
@@ -234,13 +232,6 @@ function Coin() {
             </Tab>
           </Tabs>
 
-          {/* <Routes>
-            <Route path={`/${coinId}/price`} element={<Price />} />
-            <Route
-              path={`/${coinId}/chart`}
-              element={coinId && <Chart coinId={coinId} />}
-            />
-          </Routes> */}
           <Routes>
             <Route path={`price`} element={<Price />} />
             <Route

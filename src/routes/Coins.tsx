@@ -7,11 +7,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
+  width: 100%;
+  height: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 `;
 const Header = styled.header`
   height: 10vh;
@@ -65,7 +72,7 @@ const CoinsList = styled.ul``;
 const Coin = styled.div`
   height: 250px;
   background-color: transparent;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
   padding: 0;
   border-radius: 50px;
   transition: 0.2s ease-in-out;
@@ -80,7 +87,7 @@ const Coin = styled.div`
     justify-content: center;
     gap: 20px;
     align-items: center;
-    color: ${(props) => props.theme.accentColor};
+    color: ${(props) => props.theme.bgColor};
     font-size: 22px;
     text-align: center;
   }
@@ -93,7 +100,7 @@ const Coin = styled.div`
 
 const Title = styled.h1`
   font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.bgColor};
 `;
 
 const Loader = styled.span`
@@ -104,6 +111,18 @@ const Loader = styled.span`
 const Img = styled.img`
   width: 65px;
   height: 65px;
+`;
+
+const ToggleDarkBtn = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.bgColor};
+  margin-left: 50px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 `;
 
 const Rank = styled.span`
@@ -140,8 +159,14 @@ function Coins() {
     queryFn: fetchCoins,
     select: (data) => data.slice(0, 100),
   });
+  const toggleDark = useSetRecoilState(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
+
   const [searchCoin, setSearchCoin] = useState<string>("");
   const [filteredCoins, setFilteredCoins] = useState<Icoin[]>([]); // 필터링된 데이터를 저장할 상태
+  
+  const onToggle = () => (toggleDark((prev) => !prev));
+  
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchCoin(e.target.value);
 
@@ -166,6 +191,7 @@ function Coins() {
       </HelmetProvider>
       <Header>
         <Title>가상화폐 트래커</Title>
+        <ToggleDarkBtn onClick={onToggle}>{isDark ? "Light" : "Dark"}</ToggleDarkBtn>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
@@ -178,7 +204,7 @@ function Coins() {
                 className: "center",
                 centerMode: true,
                 infinite: true,
-                centerPadding: "100px",
+                centerPadding: "10px",
                 slidesToShow: 3,
                 speed: 500,
                 autoplay: true,
