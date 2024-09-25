@@ -1,17 +1,21 @@
 {
   "files": {
     "main.css": "/CRYPTO-TRACKER/static/css/main.a8542b66.css",
-    "main.js": "/CRYPTO-TRACKER/static/js/main.3723ce5c.js",
+    "main.js": "/CRYPTO-TRACKER/static/js/main.1285cf95.js",
     "static/media/slick.svg": "/CRYPTO-TRACKER/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/CRYPTO-TRACKER/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/CRYPTO-TRACKER/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/CRYPTO-TRACKER/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/CRYPTO-TRACKER/index.html",
+    "static/media/light_mode.svg": "/CRYPTO-TRACKER/static/media/light_mode.39f18489ca9daa5169b46236e1157617.svg",
+    "static/media/dark_mode.svg": "/CRYPTO-TRACKER/static/media/dark_mode.7aa74fd707cd3475f64aa980eb1a9c49.svg",
+    "static/media/home.svg": "/CRYPTO-TRACKER/static/media/home.fb77b3542640fe38353123aeb39d6817.svg",
+    "static/media/close.svg": "/CRYPTO-TRACKER/static/media/close.449013775eae23fc3687c9f6aa94a3b3.svg",
     "main.a8542b66.css.map": "/CRYPTO-TRACKER/static/css/main.a8542b66.css.map",
-    "main.3723ce5c.js.map": "/CRYPTO-TRACKER/static/js/main.3723ce5c.js.map"
+    "main.1285cf95.js.map": "/CRYPTO-TRACKER/static/js/main.1285cf95.js.map"
   },
   "entrypoints": [
     "static/css/main.a8542b66.css",
-    "static/js/main.3723ce5c.js"
+    "static/js/main.1285cf95.js"
   ]
 }
