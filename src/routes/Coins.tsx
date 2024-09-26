@@ -137,6 +137,7 @@ const Search = styled.input`
   margin: 0 auto;
   border: 2px solid ${(props) => props.theme.bgColor};
   border-radius: 5px;
+  background-color: ${(props) => props.theme.textColor};
   color: ${(props) => props.theme.bgColor};
 `;
 const SrchUl = styled.ul`
