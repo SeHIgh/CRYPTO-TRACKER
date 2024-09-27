@@ -16,7 +16,11 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
+  height: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 `;
 const Header = styled.header`
   height: 10vh;
@@ -50,8 +54,8 @@ const Description = styled.p`
 `;
 
 const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+  font-size: 38px;
+  color: ${(props) => props.theme.bgColor};
 `;
 
 const Loader = styled.span`

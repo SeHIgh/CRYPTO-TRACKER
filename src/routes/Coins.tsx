@@ -142,8 +142,9 @@ const Search = styled.input`
 `;
 const SrchUl = styled.ul`
   width: 50%;
-  margin: auto;
+  margin: 0 auto;
   color: ${(props) => props.theme.bgColor};
+  opacity: 70%;
 `;
 const SrchLi = styled.li`
   color: ${(props) => props.theme.bgColor};
