@@ -26,17 +26,26 @@ function Chart({ coinId }: IChartProps) {
     queryFn: () => fetchCoinHistory(coinId),
     // refetchInterval: 10000,
   });
+  const exceptData = data ?? [];
+  const chartData = exceptData?.map((i) => {
+    return {
+      x: i.time_close,
+      y: [i.open, i.high, i.low, i.close]
+    };
+  });
   return (
     <div>
       {isLoading ? (
         "Loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
+          height={350}
           series={[
             {
               name: "Price",
-              data: data?.map((price) => price.close) ?? [],
+              // data: data?.map((price) => price.close) ?? [],
+              data: chartData,
             },
           ]}
           options={{
@@ -101,10 +110,6 @@ function Chart({ coinId }: IChartProps) {
             //   }
             // }
             // 차트 틀 옵션 : candlestick
-            chart: {
-              type: "candlestick",
-              height: 350,
-            },
             title: {
               text: "CandleStick Chart",
               align: "left",

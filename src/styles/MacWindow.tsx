@@ -12,7 +12,8 @@ export const MacWindowWrapper = styled.div`
   padding: 0px;
   margin: auto;
   width: 80%;
-  height: 65vh;
+  min-height: 65vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -15,12 +15,13 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 480px;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  overflow: hidden;
 `;
 const Header = styled.header`
   height: 10vh;
@@ -50,6 +51,7 @@ const OverviewItem = styled.div`
 `;
 // 코인에 대한 설명
 const Description = styled.p`
+  color: ${(props) => props.theme.bgColor};
   margin: 20px 0px;
 `;
 
