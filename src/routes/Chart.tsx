@@ -40,66 +40,83 @@ function Chart({ coinId }: IChartProps) {
             },
           ]}
           options={{
-            // 차트 틀 옵션
-            chart: {
-              height: 300,
-              width: 500, // toolbar 옵션
-              toolbar: { show: false },
-              // fontFamily: "galmuri9" //font 옵션
-              background: "transparent",
-              type: "area",
-            },
+            // 차트 틀 옵션 : area
+            // chart: {
+            //   height: 300,
+            //   width: 500, // toolbar 옵션
+            //   toolbar: { show: false },
+            //   // fontFamily: "galmuri9" //font 옵션
+            //   background: "transparent",
+            //   type: "area",
+            // },
             // 제공 테마 옵션
-            theme: {
-              mode: isDark ? "dark" : "light",
-              // palette: "palette1",
-              // monochrome: {
-              //   enabled: false,
-              //   color: "#c7ecee",
-              //   shadeTo: "dark",
-              //   shadeIntensity: 0.65,
-              // },
+            // theme: {
+            //   mode: isDark ? "dark" : "light",
+            //   // palette: "palette1",
+            //   // monochrome: {
+            //   //   enabled: false,
+            //   //   color: "#c7ecee",
+            //   //   shadeTo: "dark",
+            //   //   shadeIntensity: 0.65,
+            //   // },
+            // },
+            // // 차트 선 옵션
+            // stroke: {
+            //   curve: "smooth", //차트 선의 Peak 부드러운 정도
+            //   width: 4, // 차트 선 두께
+            // },
+            // // grid 옵션
+            // grid: {
+            //   show: false
+            // },
+            // // x축 옵션
+            // xaxis: {
+            //   labels: {
+            //     show: false
+            //   },
+            //   axisTicks: {
+            //     show: false
+            //   },
+            //   axisBorder: {
+            //     show: false
+            //   },
+            //   categories: data?.map((price) => new Date(Number(price.time_close) * 1000).toUTCString()) ?? [],
+            //   type: "datetime",
+            // },
+            // // y축 옵션
+            // yaxis: {
+            //   show: false
+            // },
+            // fill: {
+            //   type: "gradient",
+            //   gradient: {
+            //     gradientToColors: ["#0be881"],
+            //     stops: [0, 100],
+            //   }
+            // },
+            // colors: ["#0fbcf9"],
+            // tooltip: {
+            //   y: {
+            //     formatter: (value) => `${value.toFixed(2)}`
+            //   }
+            // }
+            // 차트 틀 옵션 : candlestick
+            chart: {
+              type: "candlestick",
+              height: 350,
             },
-            // 차트 선 옵션
-            stroke: {
-              curve: "smooth", //차트 선의 Peak 부드러운 정도
-              width: 4, // 차트 선 두께
+            title: {
+              text: "CandleStick Chart",
+              align: "left",
             },
-            // grid 옵션
-            grid: {
-              show: false
-            },
-            // x축 옵션
             xaxis: {
-              labels: {
-                show: false
-              },
-              axisTicks: {
-                show: false
-              },
-              axisBorder: {
-                show: false
-              },
-              categories: data?.map((price) => new Date(Number(price.time_close) * 1000).toUTCString()) ?? [],
               type: "datetime",
             },
-            // y축 옵션
             yaxis: {
-              show: false
+              tooltip: {
+                enabled: true,
+              },
             },
-            fill: {
-              type: "gradient",
-              gradient: {
-                gradientToColors: ["#0be881"],
-                stops: [0, 100],
-              }
-            },
-            colors: ["#0fbcf9"],
-            tooltip: {
-              y: {
-                formatter: (value) => `${value.toFixed(2)}`
-              }
-            }
           }}
         ></ApexChart>
       )}
