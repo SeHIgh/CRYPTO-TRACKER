@@ -57,7 +57,7 @@ table {
 }
 body {
   font-family: "galmuri9", sans-serif;
-  background-color:${(props) => props.theme.bgColor};
+  background-color: #dfe6e9;
   color:${(props) => props.theme.textColor};
 }
 a {

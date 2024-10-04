@@ -15,14 +15,16 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 850px;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  overflow: hidden;
+  color: ${(props) => props.theme.textColor};
 `;
+
 const Header = styled.header`
   height: 10vh;
   display: flex;
@@ -30,14 +32,14 @@ const Header = styled.header`
   align-items: center;
 `;
 
-// black box
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.inactiveColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
+
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,23 +49,29 @@ const OverviewItem = styled.div`
     font-weight: 400;
     text-transform: uppercase;
     margin-bottom: 5px;
+    color: ${(props) => props.theme.textColor};
+  }
+  span:last-child {
+    color: ${(props) => props.theme.accentColor};
   }
 `;
-// 코인에 대한 설명
+
 const Description = styled.p`
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
   margin: 20px 0px;
 `;
 
 const Title = styled.h1`
   font-size: 38px;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.span`
   text-align: center;
   display: block;
+  color: ${(props) => props.theme.textColor};
 `;
+
 interface RouteParams {
   coinId: string;
   [key: string]: string | undefined; // 인덱스 시그니처 추가
@@ -85,28 +93,21 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) =>
+    props.isActive ? props.theme.activeColor : props.theme.inactiveColor};
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
-  background-color: ${(props) =>
-    props.isActive ? props.theme.activeColor : props.theme.inactiveColor};
   a {
     display: block;
+    color: inherit;
+    text-decoration: none;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: ${(props) => props.theme.hoverColor};
   }
 `;
-
-// 타입이 배열인 경우 필요하다면 interface 를 이용해서 자료형을 지정해줄 수 있다.
-// interface ITag{
-//   id: string;
-//   name: string;
-//   coin_counter: number;
-//   ico_counter: number;
-// }
 
 interface IInfoData {
   id: string;
@@ -117,8 +118,6 @@ interface IInfoData {
   is_active: boolean;
   type: string;
   logo: string;
-  // tags:ITag[];
-  // team:object;
   description: string;
   message: string;
   open_source: boolean;
@@ -182,7 +181,6 @@ function Coin() {
     {
       queryKey: ["tickers", coinId],
       queryFn: () => fetchCoinTickers(coinId),
-      // refetchInterval: 5000,
     }
   );
 
@@ -192,49 +190,49 @@ function Coin() {
       <HelmetProvider>
         <Helmet>
           <title>
-            {state ? state : loading ? "Loading..." : infoData?.name}
+            {state ? state : loading ? "로딩 중..." : infoData?.name}
           </title>
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Title>{state ? state : loading ? "Loading..." : infoData?.name}</Title>
+        <Title>{state ? state : loading ? "로딩 중..." : infoData?.name}</Title>
       </Header>
       {loading ? (
-        <Loader>Loading...</Loader>
+        <Loader>로딩 중...</Loader>
       ) : (
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank:</span>
+              <span>순위:</span>
               <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol:</span>
+              <span>기호:</span>
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Price:</span>
+              <span>가격:</span>
               <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
-              <span>Total Suply:</span>
+              <span>총 공급량:</span>
               <span>{tickersData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Max Supply:</span>
+              <span>최대 공급량:</span>
               <span>{tickersData?.max_supply}</span>
             </OverviewItem>
           </Overview>
 
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/${coinId}/chart`}>차트</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/price`}>가격</Link>
             </Tab>
           </Tabs>
 

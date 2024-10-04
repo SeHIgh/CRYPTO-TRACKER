@@ -3,6 +3,13 @@ import { fetchCoinHistory } from "./api";
 import ApexChart from "react-apexcharts";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atoms";
+import styled from "styled-components";
+
+const ChartWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+`;
 
 interface IChartProps {
   coinId: string;
@@ -34,98 +41,83 @@ function Chart({ coinId }: IChartProps) {
     };
   });
   return (
-    <div>
+    <ChartWrapper>
       {isLoading ? (
-        "Loading chart..."
+        "차트 로딩 중..."
       ) : (
         <ApexChart
           type="candlestick"
           height={350}
           series={[
             {
-              name: "Price",
-              // data: data?.map((price) => price.close) ?? [],
+              name: "가격",
               data: chartData,
             },
           ]}
           options={{
-            // 차트 틀 옵션 : area
-            // chart: {
-            //   height: 300,
-            //   width: 500, // toolbar 옵션
-            //   toolbar: { show: false },
-            //   // fontFamily: "galmuri9" //font 옵션
-            //   background: "transparent",
-            //   type: "area",
-            // },
-            // 제공 테마 옵션
-            // theme: {
-            //   mode: isDark ? "dark" : "light",
-            //   // palette: "palette1",
-            //   // monochrome: {
-            //   //   enabled: false,
-            //   //   color: "#c7ecee",
-            //   //   shadeTo: "dark",
-            //   //   shadeIntensity: 0.65,
-            //   // },
-            // },
-            // // 차트 선 옵션
-            // stroke: {
-            //   curve: "smooth", //차트 선의 Peak 부드러운 정도
-            //   width: 4, // 차트 선 두께
-            // },
-            // // grid 옵션
-            // grid: {
-            //   show: false
-            // },
-            // // x축 옵션
-            // xaxis: {
-            //   labels: {
-            //     show: false
-            //   },
-            //   axisTicks: {
-            //     show: false
-            //   },
-            //   axisBorder: {
-            //     show: false
-            //   },
-            //   categories: data?.map((price) => new Date(Number(price.time_close) * 1000).toUTCString()) ?? [],
-            //   type: "datetime",
-            // },
-            // // y축 옵션
-            // yaxis: {
-            //   show: false
-            // },
-            // fill: {
-            //   type: "gradient",
-            //   gradient: {
-            //     gradientToColors: ["#0be881"],
-            //     stops: [0, 100],
-            //   }
-            // },
-            // colors: ["#0fbcf9"],
-            // tooltip: {
-            //   y: {
-            //     formatter: (value) => `${value.toFixed(2)}`
-            //   }
-            // }
-            // 차트 틀 옵션 : candlestick
-            title: {
-              text: "CandleStick Chart",
-              align: "left",
+            chart: {
+              type: 'candlestick',
+              height: 350,
+              toolbar: {
+                show: false,
+              },
+              background: "transparent",
+              fontFamily: 'galmuri9',
             },
+            // 차트 제목 설정
+            title: {
+              text: "캔들스틱 차트",
+              align: "left",
+              style: {
+                fontSize:  '16px',
+                fontWeight:  'bold',
+                fontFamily:  'galmuri9',
+                color:  isDark ? "#c7ecee" : "#40739e"
+              }
+            },
+            // grid 설정
+            grid: {
+              show: false,
+            },
+            // x축 설정
             xaxis: {
               type: "datetime",
+              labels: {
+                show: false,
+              },
+              axisBorder: {
+                show: false,
+              },
+              axisTicks: {
+                show: false,
+              },
             },
+            // y축 설정
             yaxis: {
-              tooltip: {
-                enabled: true,
+              show: false,
+            },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: '#3C90EB',
+                  downward: '#DF7D46'
+                },
+              },
+            },
+            theme: {
+              mode: isDark ? "dark" : "light",
+              palette: 'palette1', 
+              monochrome: {
+                  enabled: false,
+                  color: '#255aee',
+                  shadeTo: 'light',
+                  shadeIntensity: 0.65
               },
             },
           }}
         ></ApexChart>
       )}
-    </div>
+    </ChartWrapper>
   );
 }
 

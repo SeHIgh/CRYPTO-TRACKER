@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 const Container = styled.div`
   padding: 0px 20px;
   width: 100%;
+  max-width: 850px;
   height: 100%;
-  max-width: 1000px;
   margin: 0 auto;
   display: flex;
   justify-content: start;
@@ -29,8 +29,8 @@ const SliderWrapper = styled.div`
   height: 100px;
   padding: 10px;
   margin: 0 auto;
-  border-top:  solid ${(props) => props.theme.bgColor};
-  border-bottom:  solid ${(props) => props.theme.bgColor};
+  border-top:  solid ${(props) => props.theme.textColor};
+  border-bottom:  solid ${(props) => props.theme.textColor};
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -88,7 +88,7 @@ const Coin = styled.div`
     justify-content: center;
     gap: 5px;
     align-items: center;
-    color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
     font-size: 16px;
   }
   &:hover {
@@ -101,7 +101,7 @@ const Coin = styled.div`
 
 const Title = styled.h1`
   font-size: 38px;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.span`
@@ -125,8 +125,8 @@ const Rank = styled.span`
   line-height: 20px;
   background-color: transparent;
   border-radius: 50%;
-  color: ${(props) => props.theme.bgColor};
-  border: 2px solid ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.accentColor};
+  border: 2px solid ${(props) => props.theme.accentColor};
   text-align: center;
 `;
 
@@ -135,19 +135,19 @@ const Search = styled.input`
   width: 50%;
   height: 35px;
   margin: 0 auto;
-  border: 2px solid ${(props) => props.theme.bgColor};
+  border: 2px solid ${(props) => props.theme.textColor};
   border-radius: 5px;
-  background-color: ${(props) => props.theme.textColor};
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 `;
 const SrchUl = styled.ul`
   width: 50%;
   margin: 0 auto;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
   opacity: 70%;
 `;
 const SrchLi = styled.li`
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 interface Icoin {

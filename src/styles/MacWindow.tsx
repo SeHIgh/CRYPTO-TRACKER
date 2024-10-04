@@ -5,18 +5,19 @@ import { isDarkAtom } from "../atoms";
 import { useNavigate } from "react-router-dom";
 
 export const MacWindowWrapper = styled.div`
-  background-color: ${(props) => props.theme.textColor};
-  border: 2px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.bgColor};
+  /* border: 3px solid ${(props) => props.theme.bgColor}; */
+  border: none;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   padding: 0px;
   margin: auto;
   width: 80%;
-  min-height: 65vh;
+  min-height: 500px; // 최소 높이 설정
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start; // 내용이 위에서부터 시작하도록 변경
 
   button {
     height: 26px;
@@ -34,10 +35,10 @@ const StateBar = styled.div`
   width: 100%;
   height: 40px;
   padding: 0 10px;
-  /* border: 2px solid ${(props) => props.theme.textColor}; */
   border: none;
-  border-radius: 8px 8px 0 0;
-  background-color: ${(props) => props.theme.bgColor};
+  /* border-bottom: 2px solid ${(props) => props.theme.textColor}; */
+  border-radius: 10px 10px 0 0;
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: start;
   align-items: center;
