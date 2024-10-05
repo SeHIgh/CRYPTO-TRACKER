@@ -32,9 +32,11 @@ footer, header, hgroup, main, menu, nav, section {
 }
 body {
   height: 100vh;
+  padding: 10vh;
   line-height: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
 }
 menu, ol, ul {

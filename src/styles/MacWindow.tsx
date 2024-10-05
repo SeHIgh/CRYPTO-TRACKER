@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { ClsBtn, HomeBtn, ModBtn } from "./Buttons";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isDarkAtom } from "../atoms";
+import { contentHeightAtom, isDarkAtom } from "../atoms";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export const MacWindowWrapper = styled.div`
+export const MacWindowWrapper = styled.div<{ contentHeight: number }>`
   background-color: ${(props) => props.theme.bgColor};
   /* border: 3px solid ${(props) => props.theme.bgColor}; */
   border: none;
@@ -18,6 +19,10 @@ export const MacWindowWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start; // 내용이 위에서부터 시작하도록 변경
+  /* 자연스러운 애니메이션 */
+  max-height: ${props => props.contentHeight}px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 
   button {
     height: 26px;
@@ -57,15 +62,30 @@ export default function MacWindowBar() {
   const toggleDark = useSetRecoilState(isDarkAtom);
   const isDark = useRecoilValue(isDarkAtom);
   const nav = useNavigate();
+  const contentHeight = useRecoilValue(contentHeightAtom);
+  const setContentHeight = useSetRecoilState(contentHeightAtom);
 
   const onToggle = () => (toggleDark((prev) => !prev));
   const goBack = () => {nav(-1);};
+  const goHome = () => {nav("/");};
+  const onResize = () => {
+    const newHeight = window.innerHeight - 100;
+    setContentHeight(newHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
   return (
     <StateBar>
       <BtnCont>
         <ClsBtn onClick={goBack}></ClsBtn>
         <ModBtn onClick={onToggle} isDark={isDark}></ModBtn>
-        <HomeBtn></HomeBtn>
+        <HomeBtn onClick={goHome}></HomeBtn>
       </BtnCont>
     </StateBar>
   );
