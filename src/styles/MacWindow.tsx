@@ -5,7 +5,7 @@ import { contentHeightAtom, isDarkAtom } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export const MacWindowWrapper = styled.div<{ contentHeight: number }>`
+export const MacWindowWrapper = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   /* border: 3px solid ${(props) => props.theme.bgColor}; */
   border: none;
@@ -20,7 +20,7 @@ export const MacWindowWrapper = styled.div<{ contentHeight: number }>`
   flex-direction: column;
   justify-content: flex-start; // 내용이 위에서부터 시작하도록 변경
   /* 자연스러운 애니메이션 */
-  max-height: ${props => props.contentHeight}px;
+  max-height: 500px;
   overflow: hidden;
   transition: max-height 0.3s ease;
 
